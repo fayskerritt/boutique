@@ -33,7 +33,7 @@ class Order(models.Model):
         """
         Update grand total each time line is added, including delivery cost
         """
-        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineotem_total__sum']
+        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum']
         if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
             self.delivery_cost = self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
         else:
